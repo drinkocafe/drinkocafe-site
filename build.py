@@ -259,10 +259,10 @@ def page_home():
 
 <div class="slideshow">
   <div class="slideshow-track">
-    <img src="images/gallery-1.jpg" alt="Hong Kong milk tea">
-    <img src="images/gallery-2.jpg" alt="Hong Kong milk tea">
-    <img src="images/gallery-3.jpg" alt="Hong Kong milk tea">
-    <img src="images/gallery-4.jpg" alt="Hong Kong milk tea">
+    <img src="images/gallery-1.jpg" alt="Victoria Harbour skyline with junk boat" style="object-position: center 65%">
+    <img src="images/gallery-2.jpg" alt="Mong Kok street at night" style="object-position: center 35%">
+    <img src="images/gallery-3.jpg" alt="Tian Tan Buddha statue" style="object-position: center 28%">
+    <img src="images/gallery-4.jpg" alt="Hong Kong skyline at sunset" style="object-position: center 48%">
   </div>
   <button class="slideshow-nav prev" aria-label="Previous slide">&#8249;</button>
   <button class="slideshow-nav next" aria-label="Next slide">&#8250;</button>
@@ -572,7 +572,7 @@ def page_blog():
   </div>
   <div class="blog-grid">
     <a class="blog-card" href="blog/history-and-culture-of-hong-kong-milk-tea.html">
-      <img src="images/blog-history.jpg" alt="History and Culture of Hong Kong Milk Tea">
+      <img src="images/blog-history.jpg" alt="History and Culture of Hong Kong Milk Tea" style="object-position: center 40%">
       <span class="dateline">July 29, 2023</span>
       <h3>History and Culture of Hong Kong Milk Tea</h3>
       <p>Discover the captivating history and culture of Hong Kong Milk Tea, a beloved beverage that
