@@ -68,13 +68,20 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
 <a class="skip-link" href="#main">跳至主要內容</a>
 <div class="announce">我們目前所有產品都已售罄，非常感謝您的支持！</div>
 <header class="site-header">
-  <div class="nav-wrap">
-    <a class="brand" href="{base}index.html">DrinKo Cafe</a>
-    <button class="nav-toggle" aria-expanded="false" aria-label="切換選單">&#9776;</button>
+  <div class="header-top">
+    <a class="header-icon-link" href="{base}shop.html" aria-label="搜尋">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </a>
+    <div class="brand-wrap"><a class="brand" href="{base}index.html">DrinKo Cafe</a></div>
+    <div class="header-top-right">
+      <a class="lang-switch" href="{switch_href}">English</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="切換選單">&#9776;</button>
+    </div>
+  </div>
+  <div class="nav-row">
     <nav class="primary-nav">
       <ul>{nav}</ul>
     </nav>
-    <a class="lang-switch" href="{switch_href}">English</a>
   </div>
 </header>
 <main id="main">
@@ -184,68 +191,76 @@ PRODUCTS = [
 ]
 
 
-def product_card(p, base):
+def product_card(p, base, show_vendor=False):
     was_html = '<span class="price-strike">${} USD</span>'.format(p["was"]) if p["was"] else ""
+    vendor_html = '<span class="vendor-label">DrinKo</span>' if show_vendor else ""
     return """
 <a class="ticket-card" href="{base}products/{slug}.html">
   <span class="stamp">售罄</span>
   <div class="thumb"><img src="{base}images/{img}" alt="{name}"></div>
   <div class="info">
-    <h3>{name}</h3>
+    {vendor}<h3>{name}</h3>
     <div class="price-row">{was}<span class="price-now">${price} USD</span></div>
   </div>
-</a>""".format(base=base, slug=p["slug"], img=p["img"], name=p["name"], was=was_html, price=p["price"])
+</a>""".format(base=base, slug=p["slug"], img=p["img"], name=p["name"], was=was_html, price=p["price"], vendor=vendor_html)
 
 
 def page_home():
-    cards = "".join(product_card(p, "") for p in PRODUCTS[:3])
+    cards = "".join(product_card(p, "", show_vendor=True) for p in PRODUCTS[:3])
     body = """
-<section class="hero">
+<div class="hero-title">
+  <h1>正宗濃郁港式奶茶</h1>
+</div>
+
+<section class="hero-row">
+  <img src="images/hero-home.jpg" alt="香港奶茶">
   <div class="hero-copy">
-    <div class="eyebrow">齊來品嚐</div>
-    <h1>正宗濃郁港式奶茶</h1>
-    <p>隨時隨地在家自製一杯正宗的香港奶茶。</p>
+    <h2>齊來品嚐</h2>
+    <p>隨時隨地在家自製一杯正宗的香港奶茶</p>
     <a class="btn solid" href="shop.html">了解更多</a>
   </div>
-  <img src="images/hero-home.jpg" alt="香港奶茶">
 </section>
 
 <section class="section">
-  <div class="section-head">
-    <div class="eyebrow">推介</div>
-    <h2>我們的奶茶包系列</h2>
+  <div class="section-head" style="text-align:left;margin-bottom:20px">
+    <h2>推介</h2>
   </div>
   <div class="grid-products">{cards}</div>
 </section>
 
 <div class="feature-panel">
-  <div class="eyebrow">輕鬆製作香港奶茶！</div>
-  <h2>在家輕鬆沖泡</h2>
-  <p style="max-width:520px;margin:0 auto 18px">
-    煮沸、浸泡、加入淡奶和煉奶——大約十分鐘即可完成。
-    歡迎瀏覽我們的 <a href="https://instagram.com/drinko" style="color:#fff;text-decoration:underline">Instagram</a>
-    觀看完整教學，或參閱產品資訊常見問題的詳細步驟。
-  </p>
-  <a class="btn" href="faq-product-information.html">查看步驟</a>
+  <h2>輕鬆製作香港奶茶！</h2>
+  <a class="video-thumb" href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="觀看：在家製作香港奶茶">
+    <img src="images/video-thumbnail.jpg" alt="在家製作香港奶茶">
+    <span class="play-badge"><span><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></span></span>
+  </a>
+  <p style="max-width:480px;margin:0 auto">在家製作香港奶茶</p>
 </div>
 
 <section class="section">
-  <div class="section-head">
-    <div class="eyebrow">顧客意見</div>
-    <h2>顧客怎麼說</h2>
+  <div class="section-head" style="text-align:left;margin-bottom:20px">
+    <h2>顧客意見</h2>
   </div>
   <div class="testimonials">
     <div class="testimonial"><h3>濃郁茶香</h3><p>&ldquo;我真的很喜歡這茶香氣和味道有多濃郁，聞起來和喝起來都很棒。&rdquo; &ndash; Jennifer</p></div>
     <div class="testimonial"><h3>非常道地</h3><p>&ldquo;真的很好喝，是我最近喝過最好的其中一款。&rdquo; &ndash; Jessica</p></div>
     <div class="testimonial"><h3>想起香港</h3><p>&ldquo;品質一如既往地優質，讓我想起香港的茶餐廳。&rdquo; &ndash; Stephen</p></div>
   </div>
+  <div style="text-align:center;margin-top:28px">
+    <a class="btn solid" href="products/hong-kong-milk-tea-evaporated-milk.html">立即選購！</a>
+  </div>
 </section>
 
-<div class="gallery-strip">
-  <img src="images/gallery-1.jpg" alt="香港奶茶相片集">
-  <img src="images/gallery-2.jpg" alt="香港奶茶相片集">
-  <img src="images/gallery-3.jpg" alt="香港奶茶相片集">
-  <img src="images/gallery-4.jpg" alt="香港奶茶相片集">
+<div class="slideshow">
+  <div class="slideshow-track">
+    <img src="images/gallery-1.jpg" alt="香港奶茶">
+    <img src="images/gallery-2.jpg" alt="香港奶茶">
+    <img src="images/gallery-3.jpg" alt="香港奶茶">
+    <img src="images/gallery-4.jpg" alt="香港奶茶">
+  </div>
+  <button class="slideshow-nav prev" aria-label="上一張">&#8249;</button>
+  <button class="slideshow-nav next" aria-label="下一張">&#8250;</button>
+  <span class="slideshow-counter">1 / 4</span>
 </div>
 """.format(cards=cards)
     write("index.html", render(
@@ -257,12 +272,11 @@ def page_shop():
     cards = "".join(product_card(p, "") for p in PRODUCTS)
     body = """
 <div class="section">
-  <div class="section-head">
-    <div class="eyebrow">產品系列</div>
+  <div class="section-head" style="text-align:left">
     <h1>我們的產品</h1>
     <p>共 4 件產品</p>
   </div>
-  <div class="grid-products">{cards}</div>
+  <div class="grid-products grid-products--4col">{cards}</div>
 </div>
 """.format(cards=cards)
     write("shop.html", render("我們的產品", "選購 DrinKo Cafe 的港式奶茶系列", "", "shop", body, "../shop.html"))
@@ -291,6 +305,9 @@ def page_product(p):
         review_html = "<p>成為第一位撰寫評論的人。</p>"
         review_count = "暫無評論"
 
+    other_products = [op for op in PRODUCTS if op["slug"] != p["slug"]]
+    related_cards = "".join(product_card(op, "../") for op in other_products)
+
     body = """
 <div class="product-detail">
   <div class="gallery">{gallery}</div>
@@ -310,8 +327,15 @@ def page_product(p):
   <h2>顧客評論</h2>
   {review_html}
 </div>
+<div class="section" style="padding-top:0">
+  <div class="section-head" style="text-align:left">
+    <h2>您可能也會喜歡</h2>
+  </div>
+  <div class="grid-products grid-products--4col">{related_cards}</div>
+</div>
 """.format(gallery=gallery_html, name=p["name"], includes=includes_html,
-           review_count=review_count, was=was_html, price=p["price"], review_html=review_html)
+           review_count=review_count, was=was_html, price=p["price"], review_html=review_html,
+           related_cards=related_cards)
     write("products/{}.html".format(p["slug"]), render(
         p["name"], p["name"], "../", "shop", body, "../../products/{}.html".format(p["slug"])
     ))

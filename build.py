@@ -65,13 +65,20 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="announce">We are completely sold out of all products at the moment. Thank YOU so much for your support!</div>
 <header class="site-header">
-  <div class="nav-wrap">
-    <a class="brand" href="{base}index.html">DrinKo Cafe</a>
-    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">&#9776;</button>
+  <div class="header-top">
+    <a class="header-icon-link" href="{base}shop.html" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </a>
+    <div class="brand-wrap"><a class="brand" href="{base}index.html">DrinKo Cafe</a></div>
+    <div class="header-top-right">
+      {switch_link}
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </div>
+  <div class="nav-row">
     <nav class="primary-nav">
       <ul>{nav}</ul>
     </nav>
-    {switch_link}
   </div>
 </header>
 <main id="main">
@@ -180,75 +187,83 @@ PRODUCTS = [
 ]
 
 
-def product_card(p, base):
+def product_card(p, base, show_vendor=False):
     was_html = ""
     if p["was"]:
         was_html = '<span class="price-strike">${} USD</span>'.format(p["was"])
+    vendor_html = '<span class="vendor-label">DrinKo</span>' if show_vendor else ""
     return """
 <a class="ticket-card" href="{base}products/{slug}.html">
-  <span class="stamp">Sold<br>Out</span>
+  <span class="stamp">Sold out</span>
   <div class="thumb"><img src="{base}images/{img}" alt="{name}"></div>
   <div class="info">
-    <h3>{name}</h3>
+    {vendor}<h3>{name}</h3>
     <div class="price-row">{was}<span class="price-now">${price} USD</span></div>
   </div>
-</a>""".format(base=base, slug=p["slug"], img=p["img"], name=p["name"], was=was_html, price=p["price"])
+</a>""".format(base=base, slug=p["slug"], img=p["img"], name=p["name"], was=was_html, price=p["price"], vendor=vendor_html)
 
 
 # ---------------------------------------------------------------
 # HOME
 # ---------------------------------------------------------------
 def page_home():
-    cards = "".join(product_card(p, "") for p in PRODUCTS[:3])
+    cards = "".join(product_card(p, "", show_vendor=True) for p in PRODUCTS[:3])
     body = """
-<section class="hero">
+<div class="hero-title">
+  <h1>Discover the Rich and Authentic Flavors of Hong Kong Milk Tea</h1>
+</div>
+
+<section class="hero-row">
+  <img src="images/hero-home.jpg" alt="Hong Kong milk tea">
   <div class="hero-copy">
-    <div class="eyebrow">Welcome</div>
-    <h1>Discover the Rich and Authentic Flavors of Hong Kong Milk Tea</h1>
-    <p>Make your own authentic Hong Kong Milk Tea anytime and anywhere.</p>
+    <h2>Welcome</h2>
+    <p>Make your own authentic Hong Kong Milk Tea anytime and anywhere</p>
     <a class="btn solid" href="shop.html">Learn More</a>
   </div>
-  <img src="images/hero-home.jpg" alt="Hong Kong milk tea">
 </section>
 
 <section class="section">
-  <div class="section-head">
-    <div class="eyebrow">Feature Collection</div>
-    <h2>Our Milk Tea Bag Sets</h2>
+  <div class="section-head" style="text-align:left;margin-bottom:20px">
+    <h2>Feature Collection</h2>
   </div>
   <div class="grid-products">{cards}</div>
 </section>
 
 <div class="feature-panel">
-  <div class="eyebrow">Enjoy easy Hong Kong Milk Tea making!</div>
-  <h2>How to make it at home</h2>
-  <p style="max-width:520px;margin:0 auto 18px">
-    Boil, steep, pour over evaporated and condensed milk — ready in about ten minutes.
-    See the full walkthrough on our <a href="pages_bridge" style="color:#fff;text-decoration:underline">Instagram</a>
-    or read the step-by-step on the Product Information FAQ.
-  </p>
-  <a class="btn" href="faq-product-information.html">Read the steps</a>
+  <h2>Enjoy easy Hong Kong Milk Tea making!</h2>
+  <a class="video-thumb" href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="Watch: How to make Hong Kong Milk Tea at home">
+    <img src="images/video-thumbnail.jpg" alt="How to make Hong Kong Milk Tea at home">
+    <span class="play-badge"><span><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></span></span>
+  </a>
+  <p style="max-width:480px;margin:0 auto">How to make Hong Kong Milk Tea at home</p>
 </div>
 
 <section class="section">
-  <div class="section-head">
-    <div class="eyebrow">Testimonials</div>
-    <h2>What people are saying</h2>
+  <div class="section-head" style="text-align:left;margin-bottom:20px">
+    <h2>Testimonials</h2>
   </div>
   <div class="testimonials">
     <div class="testimonial"><h3>Strong Tea flavor</h3><p>&ldquo;I really love how strong the tea aroma and flavor is. It smells and tastes great.&rdquo; &ndash; Jennifer</p></div>
     <div class="testimonial"><h3>So Authentic</h3><p>&ldquo;Very good indeed. One of the best ones I had recently.&rdquo; &ndash; Jessica</p></div>
     <div class="testimonial"><h3>Remind me of Hong Kong</h3><p>&ldquo;Premium quality, as always. It reminds me of those Cha Chan Teng in Hong Kong.&rdquo; &ndash; Stephen</p></div>
   </div>
+  <div style="text-align:center;margin-top:28px">
+    <a class="btn solid" href="products/hong-kong-milk-tea-evaporated-milk.html">Ready to try!</a>
+  </div>
 </section>
 
-<div class="gallery-strip">
-  <img src="images/gallery-1.jpg" alt="Hong Kong milk tea gallery">
-  <img src="images/gallery-2.jpg" alt="Hong Kong milk tea gallery">
-  <img src="images/gallery-3.jpg" alt="Hong Kong milk tea gallery">
-  <img src="images/gallery-4.jpg" alt="Hong Kong milk tea gallery">
+<div class="slideshow">
+  <div class="slideshow-track">
+    <img src="images/gallery-1.jpg" alt="Hong Kong milk tea">
+    <img src="images/gallery-2.jpg" alt="Hong Kong milk tea">
+    <img src="images/gallery-3.jpg" alt="Hong Kong milk tea">
+    <img src="images/gallery-4.jpg" alt="Hong Kong milk tea">
+  </div>
+  <button class="slideshow-nav prev" aria-label="Previous slide">&#8249;</button>
+  <button class="slideshow-nav next" aria-label="Next slide">&#8250;</button>
+  <span class="slideshow-counter">1 / 4</span>
 </div>
-""".replace("pages_bridge", "https://instagram.com/drinko").format(cards=cards)
+""".format(cards=cards)
     write("index.html", render(
         "Home-made Hong Kong Milk Tea",
         "Make your own authentic Hong Kong Milk Tea anytime and anywhere",
@@ -263,12 +278,11 @@ def page_shop():
     cards = "".join(product_card(p, "") for p in PRODUCTS)
     body = """
 <div class="section">
-  <div class="section-head">
-    <div class="eyebrow">Collection</div>
+  <div class="section-head" style="text-align:left">
     <h1>All Products</h1>
     <p>4 products</p>
   </div>
-  <div class="grid-products">{cards}</div>
+  <div class="grid-products grid-products--4col">{cards}</div>
 </div>
 """.format(cards=cards)
     write("shop.html", render("All Products", "Shop DrinKo Cafe's Hong Kong milk tea collection", "", "shop", body, switch_href="zh/shop.html"))
@@ -303,6 +317,9 @@ def page_product(p):
         review_html = "<p>Be the first to write a review.</p>"
         review_count = "No reviews yet"
 
+    other_products = [op for op in PRODUCTS if op["slug"] != p["slug"]]
+    related_cards = "".join(product_card(op, "../") for op in other_products)
+
     body = """
 <div class="product-detail">
   <div class="gallery">{gallery}</div>
@@ -313,7 +330,7 @@ def page_product(p):
     {includes}
     <p style="font-size:0.85rem">{review_count}</p>
     <div class="price-row">{was}<span class="price-now">${price} USD</span></div>
-    <button class="btn disabled" disabled>Sold Out</button>
+    <button class="btn disabled" disabled>Sold out</button>
     <div class="form-note">This product is currently sold out and the shop is on pause. Follow
       <a href="https://instagram.com/drinko" target="_blank" rel="noopener">@drinko</a> on Instagram
       for restock updates, or reach out on the <a href="../contact.html">Contact</a> page.</div>
@@ -323,8 +340,15 @@ def page_product(p):
   <h2>Customer Reviews</h2>
   {review_html}
 </div>
+<div class="section" style="padding-top:0">
+  <div class="section-head" style="text-align:left">
+    <h2>You may also like</h2>
+  </div>
+  <div class="grid-products grid-products--4col">{related_cards}</div>
+</div>
 """.format(gallery=gallery_html, name=p["name"], desc=p["desc"], includes=includes_html,
-           review_count=review_count, was=was_html, price=p["price"], review_html=review_html)
+           review_count=review_count, was=was_html, price=p["price"], review_html=review_html,
+           related_cards=related_cards)
     write("products/{}.html".format(p["slug"]), render(p["name"], p["desc"], "../", "shop", body, switch_href="../zh/products/{}.html".format(p["slug"])))
 
 
