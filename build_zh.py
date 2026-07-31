@@ -211,14 +211,14 @@ def product_card(p, base, show_vendor=False):
 
 
 def page_home():
-    cards = "".join(product_card(p, "", show_vendor=True) for p in PRODUCTS[:3])
+    cards = "".join(product_card(p, "../", show_vendor=True) for p in PRODUCTS[:3])
     body = """
 <div class="hero-title">
   <h1>正宗濃郁港式奶茶</h1>
 </div>
 
 <section class="hero-row">
-  <img src="images/hero-home.jpg" alt="香港奶茶">
+  <img src="../images/hero-home.jpg" alt="香港奶茶">
   <div class="hero-copy">
     <h2>齊來品嚐</h2>
     <p>隨時隨地在家自製一杯正宗的香港奶茶</p>
@@ -236,7 +236,7 @@ def page_home():
 <div class="feature-panel">
   <h2 class="heading-lg">輕鬆製作香港奶茶！</h2>
   <video class="video-embed" controls preload="metadata" aria-label="在家製作香港奶茶">
-    <source src="images/video-thumbnail.mp4" type="video/mp4">
+    <source src="../images/video-thumbnail.mp4" type="video/mp4">
   </video>
   <p style="max-width:480px;margin:12px auto 0">在家製作香港奶茶 &mdash;
     或於 <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">Instagram</a> 觀看。</p>
@@ -258,10 +258,10 @@ def page_home():
 
 <div class="slideshow">
   <div class="slideshow-track">
-    <img src="images/gallery-1.jpg" alt="香港奶茶">
-    <img src="images/gallery-2.jpg" alt="香港奶茶">
-    <img src="images/gallery-3.jpg" alt="香港奶茶">
-    <img src="images/gallery-4.jpg" alt="香港奶茶">
+    <img src="../images/gallery-1.jpg" alt="維多利亞港夜景與帆船" style="object-position: center 65%">
+    <img src="../images/gallery-2.jpg" alt="旺角夜景街道" style="object-position: center 35%">
+    <img src="../images/gallery-3.jpg" alt="天壇大佛" style="object-position: center 28%">
+    <img src="../images/gallery-4.jpg" alt="香港日落天際線" style="object-position: center 48%">
   </div>
   <button class="slideshow-nav prev" aria-label="上一張">&#8249;</button>
   <button class="slideshow-nav next" aria-label="下一張">&#8250;</button>
@@ -274,7 +274,7 @@ def page_home():
 
 
 def page_shop():
-    cards = "".join(product_card(p, "") for p in PRODUCTS)
+    cards = "".join(product_card(p, "../") for p in PRODUCTS)
     body = """
 <div class="section">
   <div class="section-head section-head--left">
@@ -294,9 +294,9 @@ def page_product(p):
     else:
         includes_html = "<p>{}</p>".format(p["desc"])
 
-    gallery_imgs = ['<img src="../images/{}" alt="{}">'.format(p["img"], p["name"])]
+    gallery_imgs = ['<img src="../../images/{}" alt="{}">'.format(p["img"], p["name"])]
     if p.get("img2"):
-        gallery_imgs.append('<img src="../images/{}" alt="{}">'.format(p["img2"], p["name"]))
+        gallery_imgs.append('<img src="../../images/{}" alt="{}">'.format(p["img2"], p["name"]))
     gallery_html = "".join(gallery_imgs)
 
     if p["reviews"]:
@@ -311,7 +311,7 @@ def page_product(p):
         review_count = "暫無評論"
 
     other_products = [op for op in PRODUCTS if op["slug"] != p["slug"]]
-    related_cards = "".join(product_card(op, "../") for op in other_products)
+    related_cards = "".join(product_card(op, "../../") for op in other_products)
 
     body = """
 <div class="product-detail">
@@ -354,7 +354,7 @@ def page_preorder():
   <p>您是否曾經想過，能否不用花時間去準備，便能享用我們的獨特香港奶茶呢？現在夢想成真了！我們很高興地告訴大家，我們計劃擴大我們香港奶茶體驗，希望很快便可以和大家分享我們的樽裝香港奶茶！</p>
   <p>請填寫一份簡單的表格來加入我們的預售清單。當樽裝奶茶上市時，您還可以享用我們的獨家優惠！</p>
   <p><a href="https://docs.google.com/forms/d/e/1FAIpQLScTNoTmYPSjW3Un0SRfl9dMmyL9ScK2uvTjb4YoSEoiJ7SgCA/viewform" target="_blank" rel="noopener">填寫表格</a></p>
-  <img class="feature" src="images/preorder-bottle.jpg" alt="樽裝奶茶預訂">
+  <img class="feature" src="../images/preorder-bottle.jpg" alt="樽裝奶茶預訂">
 </div>
 """
     write("pre-order.html", render("預訂", "加入我們的樽裝港式奶茶預售名單", "", "preorder", body, "../pre-order.html"))
@@ -497,7 +497,7 @@ def page_blog():
   </div>
   <div class="blog-grid">
     <a class="blog-card" href="blog/history-and-culture-of-hong-kong-milk-tea.html">
-      <img src="images/blog-history.jpg" alt="香港奶茶的歷史文化">
+      <img src="../images/blog-history.jpg" alt="香港奶茶的歷史文化">
       <span class="dateline">2023年7月29日</span>
       <h3>香港奶茶的歷史文化</h3>
       <p>香港奶茶是一款深受喜愛的飲品，起源於英國統治時期的殖民地時代。這款獨特的茶品有著引人入勝的發展歷程。</p>
@@ -511,7 +511,7 @@ def page_blog():
 def page_blog_post():
     body = """
 <div class="prose">
-  <img class="feature" src="../images/blog-history.jpg" alt="香港奶茶的歷史文化">
+  <img class="feature" src="../../images/blog-history.jpg" alt="香港奶茶的歷史文化">
   <div class="eyebrow">博客</div>
   <h1>香港奶茶的歷史文化</h1>
   <span class="dateline">2023年7月29日</span>
