@@ -11,7 +11,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com">' \
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' \
-        '<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">'
+        '<link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">'
 
 NAV_ITEMS = [
     ("Home", "index.html", "home"),
@@ -48,7 +48,8 @@ def nav_html(base, active):
     return "".join(parts)
 
 
-def render(title, description, base, active, body, extra_head=""):
+def render(title, description, base, active, body, extra_head="", switch_href=None):
+    switch_link = '<a class="lang-switch" href="{}">中文</a>'.format(switch_href) if switch_href else ""
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +71,7 @@ def render(title, description, base, active, body, extra_head=""):
     <nav class="primary-nav">
       <ul>{nav}</ul>
     </nav>
+    {switch_link}
   </div>
 </header>
 <main id="main">
@@ -79,16 +81,18 @@ def render(title, description, base, active, body, extra_head=""):
 <footer class="site-footer">
   <div class="footer-wrap">
     <div>
-      <div class="eyebrow" style="color:var(--gold-light)">DrinKo Cafe</div>
-      <p style="color:var(--gold-light);max-width:280px">Home-made Hong Kong milk tea, made the way it's always been made — just easier.</p>
+      <div class="eyebrow">DrinKo Cafe</div>
+      <p style="max-width:280px">Home-made Hong Kong milk tea, made the way it's always been made — just easier.</p>
       <div class="social-row">
-        <a href="https://facebook.com/drinkocafeus" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com/drinko" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/drinko" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener">Pinterest</a>
       </div>
     </div>
     <div class="newsletter">
-      <div class="eyebrow" style="color:var(--gold-light)">Stay connected</div>
-      <p style="color:var(--gold-light)">Subscribe for product launches, discounts, and more.</p>
+      <div class="eyebrow">Stay connected</div>
+      <p>Subscribe for product launches, discounts, and more.</p>
       <form data-mailto="info@drinkocafe.com" data-subject="Newsletter signup">
         <input type="email" name="email" placeholder="Email" required>
         <button class="btn" type="submit">Subscribe</button>
@@ -101,7 +105,8 @@ def render(title, description, base, active, body, extra_head=""):
 </body>
 </html>""".format(
         title=title, description=description, base=base,
-        nav=nav_html(base, active), body=body, fonts=FONTS, extra_head=extra_head
+        nav=nav_html(base, active), body=body, fonts=FONTS, extra_head=extra_head,
+        switch_link=switch_link
     )
 
 
@@ -214,15 +219,15 @@ def page_home():
   <div class="grid-products">{cards}</div>
 </section>
 
-<div class="mesh-panel" style="padding:50px 24px;color:var(--cream);text-align:center">
-  <div class="eyebrow" style="color:var(--gold-light)">Enjoy easy Hong Kong Milk Tea making!</div>
-  <h2 style="color:var(--cream)">How to make it at home</h2>
-  <p style="color:var(--gold-light);max-width:520px;margin:0 auto 18px">
+<div class="feature-panel">
+  <div class="eyebrow">Enjoy easy Hong Kong Milk Tea making!</div>
+  <h2>How to make it at home</h2>
+  <p style="max-width:520px;margin:0 auto 18px">
     Boil, steep, pour over evaporated and condensed milk — ready in about ten minutes.
-    See the full walkthrough on our <a href="pages_bridge" style="color:var(--cream);text-decoration:underline">Instagram</a>
+    See the full walkthrough on our <a href="pages_bridge" style="color:#fff;text-decoration:underline">Instagram</a>
     or read the step-by-step on the Product Information FAQ.
   </p>
-  <a class="btn" style="border-color:var(--gold-light);color:var(--gold-light)" href="faq-product-information.html">Read the steps</a>
+  <a class="btn" href="faq-product-information.html">Read the steps</a>
 </div>
 
 <section class="section">
@@ -243,11 +248,11 @@ def page_home():
   <img src="images/gallery-3.jpg" alt="Hong Kong milk tea gallery">
   <img src="images/gallery-4.jpg" alt="Hong Kong milk tea gallery">
 </div>
-""".replace("pages_bridge", "https://instagram.com/drinkocafe").format(cards=cards)
+""".replace("pages_bridge", "https://instagram.com/drinko").format(cards=cards)
     write("index.html", render(
         "Home-made Hong Kong Milk Tea",
         "Make your own authentic Hong Kong Milk Tea anytime and anywhere",
-        "", "home", body
+        "", "home", body, switch_href="zh/index.html"
     ))
 
 
@@ -266,7 +271,7 @@ def page_shop():
   <div class="grid-products">{cards}</div>
 </div>
 """.format(cards=cards)
-    write("shop.html", render("All Products", "Shop DrinKo Cafe's Hong Kong milk tea collection", "", "shop", body))
+    write("shop.html", render("All Products", "Shop DrinKo Cafe's Hong Kong milk tea collection", "", "shop", body, switch_href="zh/shop.html"))
 
 
 # ---------------------------------------------------------------
@@ -310,7 +315,7 @@ def page_product(p):
     <div class="price-row">{was}<span class="price-now">${price} USD</span></div>
     <button class="btn disabled" disabled>Sold Out</button>
     <div class="form-note">This product is currently sold out and the shop is on pause. Follow
-      <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">@drinkocafe</a> on Instagram
+      <a href="https://instagram.com/drinko" target="_blank" rel="noopener">@drinko</a> on Instagram
       for restock updates, or reach out on the <a href="../contact.html">Contact</a> page.</div>
   </div>
 </div>
@@ -320,7 +325,7 @@ def page_product(p):
 </div>
 """.format(gallery=gallery_html, name=p["name"], desc=p["desc"], includes=includes_html,
            review_count=review_count, was=was_html, price=p["price"], review_html=review_html)
-    write("products/{}.html".format(p["slug"]), render(p["name"], p["desc"], "../", "shop", body))
+    write("products/{}.html".format(p["slug"]), render(p["name"], p["desc"], "../", "shop", body, switch_href="../zh/products/{}.html".format(p["slug"])))
 
 
 # ---------------------------------------------------------------
@@ -341,7 +346,7 @@ def page_preorder():
 </div>
 """
     write("pre-order.html", render(
-        "Pre-order", "Join the pre-launch list for bottled Hong Kong milk tea", "", "preorder", body
+        "Pre-order", "Join the pre-launch list for bottled Hong Kong milk tea", "", "preorder", body, switch_href="zh/pre-order.html"
     ))
 
 
@@ -368,7 +373,7 @@ def page_mission():
 </div>
 """
     write("our-mission.html", render(
-        "Our Mission", "Why DrinKo Cafe exists and what we're building toward", "", "mission", body
+        "Our Mission", "Why DrinKo Cafe exists and what we're building toward", "", "mission", body, switch_href="zh/our-mission.html"
     ))
 
 
@@ -411,7 +416,7 @@ def page_faq_general():
   {items}
 </div>
 """.format(items="".join(faq_item(q, a) for q, a in items))
-    write("faq-general.html", render("General Questions", "Frequently asked questions about ordering and shipping", "", "faq-general", body))
+    write("faq-general.html", render("General Questions", "Frequently asked questions about ordering and shipping", "", "faq-general", body, switch_href="zh/faq-general.html"))
 
 
 def page_faq_product():
@@ -466,7 +471,7 @@ def page_faq_product():
                      "This minimizes contact with utensils and helps preserve its quality.</p>"),
     )
     write("faq-product-information.html", render(
-        "Product Information", "How to prepare Hong Kong milk tea at home, hot or cold", "", "faq-product", body
+        "Product Information", "How to prepare Hong Kong milk tea at home, hot or cold", "", "faq-product", body, switch_href="zh/faq-product-information.html"
     ))
 
 
@@ -495,7 +500,7 @@ def page_about():
   with everyone in the US who wants to enjoy a cup of authentic and delicious tea anytime and anywhere.</p>
 </div>
 """
-    write("about-us.html", render("About Us", "The story behind DrinKo Cafe's Hong Kong milk tea", "", "about", body))
+    write("about-us.html", render("About Us", "The story behind DrinKo Cafe's Hong Kong milk tea", "", "about", body, switch_href="zh/about-us.html"))
 
 
 # ---------------------------------------------------------------
@@ -523,7 +528,7 @@ def page_contact():
   <a href="mailto:info@drinkocafe.com">info@drinkocafe.com</a>.</div>
 </div>
 """
-    write("contact.html", render("Contact", "Get in touch with DrinKo Cafe", "", "contact", body))
+    write("contact.html", render("Contact", "Get in touch with DrinKo Cafe", "", "contact", body, switch_href="zh/contact.html"))
 
 
 # ---------------------------------------------------------------
@@ -547,7 +552,7 @@ def page_blog():
   </div>
 </div>
 """
-    write("blog.html", render("Feature Articles", "DrinKo Cafe blog: stories about Hong Kong milk tea", "", "blog", body))
+    write("blog.html", render("Feature Articles", "DrinKo Cafe blog: stories about Hong Kong milk tea", "", "blog", body, switch_href="zh/blog.html"))
 
 
 def page_blog_post():
@@ -594,7 +599,7 @@ def page_blog_post():
     write("blog/history-and-culture-of-hong-kong-milk-tea.html", render(
         "History and Culture of Hong Kong Milk Tea",
         "Uncover the history and culture of Hong Kong milk tea, a colonial-era creation",
-        "../", "blog", body
+        "../", "blog", body, switch_href="../zh/blog/history-and-culture-of-hong-kong-milk-tea.html"
     ))
 
 
