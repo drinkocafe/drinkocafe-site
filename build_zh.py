@@ -236,7 +236,7 @@ def page_home():
 <div class="feature-panel">
   <h2 class="heading-lg">輕鬆製作香港奶茶！</h2>
   <video class="video-embed" controls preload="metadata" aria-label="在家製作香港奶茶">
-    <source src="images/how-to-make-tea.mp4" type="video/mp4">
+    <source src="images/video-thumbnail.mp4" type="video/mp4">
   </video>
   <p style="max-width:480px;margin:12px auto 0">在家製作香港奶茶 &mdash;
     或於 <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">Instagram</a> 觀看。</p>
