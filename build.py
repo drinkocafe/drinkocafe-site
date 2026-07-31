@@ -13,6 +13,11 @@ FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com">' \
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' \
         '<link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">'
 
+ICON_FACEBOOK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.17 2.1 15.95 2 14.66 2 11.98 2 10 3.66 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>'
+ICON_INSTAGRAM = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.21.6 1.76 1.15.5.5.9 1.1 1.15 1.76.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.9 4.9 0 0 1-1.15 1.76 4.9 4.9 0 0 1-1.76 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.9 4.9 0 0 1-1.76-1.15 4.9 4.9 0 0 1-1.15-1.76c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 0 1 5.43 2.54c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>'
+ICON_YOUTUBE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.2-.4-4.7a2.9 2.9 0 0 0-2-2C18 5 12 5 12 5s-6 0-7.6.3a2.9 2.9 0 0 0-2 2C2 8.8 2 12 2 12s0 3.2.4 4.7a2.9 2.9 0 0 0 2 2C6 19 12 19 12 19s6 0 7.6-.3a2.9 2.9 0 0 0 2-2c.4-1.5.4-4.7.4-4.7zM10 15.3V8.7l6 3.3-6 3.3z"/></svg>'
+ICON_PINTEREST = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.05-.8-.1-2 .02-2.9.1-.8.7-3.5.7-3.5s-.2-.4-.2-1c0-.9.5-1.6 1.2-1.6.6 0 .8.4.8 1 0 .6-.4 1.5-.6 2.4-.2.7.4 1.3 1 1.3 1.2 0 2.2-1.3 2.2-3.2 0-1.7-1.2-2.9-3-2.9-2 0-3.3 1.5-3.3 3.1 0 .6.2 1.2.5 1.6.05.06.06.1.04.2l-.2.7c-.03.1-.1.16-.24.1-.9-.4-1.5-1.7-1.5-2.7 0-2.2 1.6-4.3 4.6-4.3 2.4 0 4.3 1.7 4.3 4 0 2.4-1.5 4.3-3.6 4.3-.7 0-1.4-.4-1.6-.8l-.4 1.7c-.16.6-.6 1.4-.9 1.9A10 10 0 1 0 12 2z"/></svg>'
+
 NAV_ITEMS = [
     ("Home", "index.html", "home"),
     ("Shop", "shop.html", "shop"),
@@ -49,7 +54,7 @@ def nav_html(base, active):
 
 
 def render(title, description, base, active, body, extra_head="", switch_href=None):
-    switch_link = '<a class="lang-switch" href="{}">中文</a>'.format(switch_href) if switch_href else ""
+    switch_link = '<details class="lang-switch"><summary>English</summary><div class="lang-menu"><span class="current-lang">English</span><a href="{}">繁體中文</a></div></details>'.format(switch_href) if switch_href else ""
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,6 +62,7 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} — DrinKo Cafe</title>
 <meta name="description" content="{description}">
+<link rel="icon" type="image/webp" href="{base}images/favicon.webp">
 {fonts}
 <link rel="stylesheet" href="{base}css/style.css">
 {extra_head}
@@ -69,7 +75,7 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
     <a class="header-icon-link" href="{base}shop.html" aria-label="Search">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </a>
-    <div class="brand-wrap"><a class="brand" href="{base}index.html">DrinKo Cafe</a></div>
+    <div class="brand-wrap"><a class="brand" href="{base}index.html"><img src="{base}images/logo.jpg" alt="DrinKo Cafe" class="brand-logo"></a></div>
     <div class="header-top-right">
       {switch_link}
       <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">&#9776;</button>
@@ -91,18 +97,18 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
       <div class="eyebrow">DrinKo Cafe</div>
       <p style="max-width:280px">Home-made Hong Kong milk tea, made the way it's always been made — just easier.</p>
       <div class="social-row">
-        <a href="https://facebook.com/drinko" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://youtube.com/drinko" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://facebook.com/drinko" target="_blank" rel="noopener" aria-label="Facebook">{icon_facebook}</a>
+        <a href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="Instagram">{icon_instagram}</a>
+        <a href="https://youtube.com/drinko" target="_blank" rel="noopener" aria-label="YouTube">{icon_youtube}</a>
+        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener" aria-label="Pinterest">{icon_pinterest}</a>
       </div>
     </div>
     <div class="newsletter">
-      <div class="eyebrow">Stay connected</div>
-      <p>Subscribe for product launches, discounts, and more.</p>
-      <form data-mailto="info@drinkocafe.com" data-subject="Newsletter signup">
+      <h2>Stay connected</h2>
+      <p>Subscribe to our mailing list for product launches, discounts, and more!</p>
+      <form class="newsletter-form" data-mailto="info@drinkocafe.com" data-subject="Newsletter signup">
         <input type="email" name="email" placeholder="Email" required>
-        <button class="btn" type="submit">Subscribe</button>
+        <button class="newsletter-submit" type="submit" aria-label="Subscribe">&#8594;</button>
       </form>
     </div>
   </div>
@@ -113,7 +119,9 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
 </html>""".format(
         title=title, description=description, base=base,
         nav=nav_html(base, active), body=body, fonts=FONTS, extra_head=extra_head,
-        switch_link=switch_link
+        switch_link=switch_link,
+        icon_facebook=ICON_FACEBOOK, icon_instagram=ICON_INSTAGRAM,
+        icon_youtube=ICON_YOUTUBE, icon_pinterest=ICON_PINTEREST
     )
 
 
@@ -231,11 +239,11 @@ def page_home():
 
 <div class="feature-panel">
   <h2>Enjoy easy Hong Kong Milk Tea making!</h2>
-  <a class="video-thumb" href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="Watch: How to make Hong Kong Milk Tea at home">
-    <img src="images/video-thumbnail.jpg" alt="How to make Hong Kong Milk Tea at home">
-    <span class="play-badge"><span><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></span></span>
-  </a>
-  <p style="max-width:480px;margin:0 auto">How to make Hong Kong Milk Tea at home</p>
+  <video class="video-embed" controls preload="none" poster="images/video-thumbnail.jpg" aria-label="How to make Hong Kong Milk Tea at home">
+    <source src="images/how-to-make-tea.mp4" type="video/mp4">
+  </video>
+  <p style="max-width:480px;margin:12px auto 0">How to make Hong Kong Milk Tea at home &mdash;
+    or watch on <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a>.</p>
 </div>
 
 <section class="section">
@@ -365,7 +373,7 @@ def page_preorder():
   the authentic taste of Hong Kong, soon in a convenient bottle!</p>
   <p>Join our pre-launch excitement by filling out a simple form. You will also unlock an exclusive
   discount when our bottled milk tea becomes available!</p>
-  <p><a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLScTNoTmYPSjW3Un0SRfl9dMmyL9ScK2uvTjb4YoSEoiJ7SgCA/viewform" target="_blank" rel="noopener">Order Interest Form</a></p>
+  <p><a href="https://docs.google.com/forms/d/e/1FAIpQLScTNoTmYPSjW3Un0SRfl9dMmyL9ScK2uvTjb4YoSEoiJ7SgCA/viewform" target="_blank" rel="noopener">Order Interest Form</a></p>
   <img class="feature" src="images/preorder-bottle.jpg" alt="Pre-order bottled milk tea">
 </div>
 """
@@ -405,7 +413,7 @@ def page_mission():
 # FAQ pages
 # ---------------------------------------------------------------
 def faq_item(q, a):
-    return """<div class="faq-item"><button class="faq-q">{}<span class="icon">+</span></button><div class="faq-a">{}</div></div>""".format(q, a)
+    return """<div class="faq-static"><p class="faq-q-static">{}</p><div class="faq-a-static">{}</div></div>""".format(q, a)
 
 
 def page_faq_general():
@@ -449,11 +457,11 @@ def page_faq_product():
   <div class="eyebrow">FAQ</div>
   <h1>Product Information</h1>
 
-  <div class="faq-item open">
-    <button class="faq-q">1) How to prepare a good cup of Hong Kong Milk Tea?<span class="icon">+</span></button>
-    <div class="faq-a">
-      <p>If you're a reader, we've prepared the instructions below for you!</p>
-      <p><strong>Hot Hong Kong Milk Tea</strong></p>
+  <div class="faq-static">
+    <p class="faq-q-static">1) How to prepare a good cup of Hong Kong Milk Tea?</p>
+    <div class="faq-a-static">
+      <p>See <a href="https://www.instagram.com/reel/CvdBTytNmaa/" target="_blank" rel="noopener">video</a>! If you're a reader, we've prepared the instructions below for you!</p>
+      <p><em class="faq-subhead">Hot Hong Kong Milk Tea</em></p>
       <ul>
         <li>Bring 1 cup (240mL) water to boil.</li>
         <li>Add 3 tea bags to the boiling water and turn to medium heat to boil for 3 minutes (without a lid).</li>
@@ -461,7 +469,7 @@ def page_faq_product():
         <li>Reheat to boil again and pour into a cup with 3 tablespoon (45mL) evaporated milk and 1 tablespoon (15mL) condensed milk (or appropriate amount of sugar).</li>
         <li>Ready to serve. <strong>CAUTION: HOT!</strong></li>
       </ul>
-      <p><strong>Cold Hong Kong Milk Tea</strong></p>
+      <p><em class="faq-subhead">Cold Hong Kong Milk Tea</em></p>
       <ul>
         <li>Bring 1 cup (240mL) water to boil.</li>
         <li>Add 3 tea bags to the boiling water and turn to medium heat to boil for 3 minutes (without a lid).</li>

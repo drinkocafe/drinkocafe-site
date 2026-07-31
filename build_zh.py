@@ -17,6 +17,11 @@ FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com">' \
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' \
         '<link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">'
 
+ICON_FACEBOOK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.17 2.1 15.95 2 14.66 2 11.98 2 10 3.66 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>'
+ICON_INSTAGRAM = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.21.6 1.76 1.15.5.5.9 1.1 1.15 1.76.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.9 4.9 0 0 1-1.15 1.76 4.9 4.9 0 0 1-1.76 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.9 4.9 0 0 1-1.76-1.15 4.9 4.9 0 0 1-1.15-1.76c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 0 1 5.43 2.54c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>'
+ICON_YOUTUBE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.2-.4-4.7a2.9 2.9 0 0 0-2-2C18 5 12 5 12 5s-6 0-7.6.3a2.9 2.9 0 0 0-2 2C2 8.8 2 12 2 12s0 3.2.4 4.7a2.9 2.9 0 0 0 2 2C6 19 12 19 12 19s6 0 7.6-.3a2.9 2.9 0 0 0 2-2c.4-1.5.4-4.7.4-4.7zM10 15.3V8.7l6 3.3-6 3.3z"/></svg>'
+ICON_PINTEREST = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.05-.8-.1-2 .02-2.9.1-.8.7-3.5.7-3.5s-.2-.4-.2-1c0-.9.5-1.6 1.2-1.6.6 0 .8.4.8 1 0 .6-.4 1.5-.6 2.4-.2.7.4 1.3 1 1.3 1.2 0 2.2-1.3 2.2-3.2 0-1.7-1.2-2.9-3-2.9-2 0-3.3 1.5-3.3 3.1 0 .6.2 1.2.5 1.6.05.06.06.1.04.2l-.2.7c-.03.1-.1.16-.24.1-.9-.4-1.5-1.7-1.5-2.7 0-2.2 1.6-4.3 4.6-4.3 2.4 0 4.3 1.7 4.3 4 0 2.4-1.5 4.3-3.6 4.3-.7 0-1.4-.4-1.6-.8l-.4 1.7c-.16.6-.6 1.4-.9 1.9A10 10 0 1 0 12 2z"/></svg>'
+
 NAV_ITEMS = [
     ("首頁", "index.html", "home"),
     ("購買", "shop.html", "shop"),
@@ -59,6 +64,7 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title} — DrinKo Cafe</title>
 <meta name="description" content="{description}">
+<link rel="icon" type="image/webp" href="{asset_base}images/favicon.webp">
 {fonts}
 <link rel="stylesheet" href="{asset_base}css/style.css">
 <style>body {{ font-family: "Quattrocento Sans", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}</style>
@@ -72,9 +78,9 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
     <a class="header-icon-link" href="{base}shop.html" aria-label="搜尋">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </a>
-    <div class="brand-wrap"><a class="brand" href="{base}index.html">DrinKo Cafe</a></div>
+    <div class="brand-wrap"><a class="brand" href="{base}index.html"><img src="{asset_base}images/logo.jpg" alt="DrinKo Cafe" class="brand-logo"></a></div>
     <div class="header-top-right">
-      <a class="lang-switch" href="{switch_href}">English</a>
+      <details class="lang-switch"><summary>繁體中文</summary><div class="lang-menu"><a href="{switch_href}">English</a><span class="current-lang">繁體中文</span></div></details>
       <button class="nav-toggle" aria-expanded="false" aria-label="切換選單">&#9776;</button>
     </div>
   </div>
@@ -94,18 +100,18 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
       <div class="eyebrow">DrinKo Cafe</div>
       <p style="max-width:280px">自家製港式奶茶，一直以來的味道，現在更簡單。</p>
       <div class="social-row">
-        <a href="https://facebook.com/drinko" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://youtube.com/drinko" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener">Pinterest</a>
+        <a href="https://facebook.com/drinko" target="_blank" rel="noopener" aria-label="Facebook">{icon_facebook}</a>
+        <a href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="Instagram">{icon_instagram}</a>
+        <a href="https://youtube.com/drinko" target="_blank" rel="noopener" aria-label="YouTube">{icon_youtube}</a>
+        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener" aria-label="Pinterest">{icon_pinterest}</a>
       </div>
     </div>
     <div class="newsletter">
-      <div class="eyebrow">聯繫我們</div>
+      <h2>聯繫我們</h2>
       <p>請訂閱我們來獲得最新消息和新產品發佈資訊。</p>
-      <form data-mailto="info@drinkocafe.com" data-subject="Newsletter signup (zh)">
+      <form class="newsletter-form" data-mailto="info@drinkocafe.com" data-subject="Newsletter signup (zh)">
         <input type="email" name="email" placeholder="電子郵件" required>
-        <button class="btn" type="submit">訂閱</button>
+        <button class="newsletter-submit" type="submit" aria-label="訂閱">&#8594;</button>
       </form>
     </div>
   </div>
@@ -116,7 +122,9 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
 </html>""".format(
         title=title, description=description, base=base, asset_base=asset_base,
         nav=nav_html(base, active), body=body, fonts=FONTS, extra_head=extra_head,
-        switch_href=switch_href
+        switch_href=switch_href,
+        icon_facebook=ICON_FACEBOOK, icon_instagram=ICON_INSTAGRAM,
+        icon_youtube=ICON_YOUTUBE, icon_pinterest=ICON_PINTEREST
     )
 
 
@@ -230,11 +238,11 @@ def page_home():
 
 <div class="feature-panel">
   <h2>輕鬆製作香港奶茶！</h2>
-  <a class="video-thumb" href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="觀看：在家製作香港奶茶">
-    <img src="images/video-thumbnail.jpg" alt="在家製作香港奶茶">
-    <span class="play-badge"><span><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></span></span>
-  </a>
-  <p style="max-width:480px;margin:0 auto">在家製作香港奶茶</p>
+  <video class="video-embed" controls preload="none" poster="images/video-thumbnail.jpg" aria-label="在家製作香港奶茶">
+    <source src="images/how-to-make-tea.mp4" type="video/mp4">
+  </video>
+  <p style="max-width:480px;margin:12px auto 0">在家製作香港奶茶 &mdash;
+    或於 <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a> 觀看。</p>
 </div>
 
 <section class="section">
@@ -348,7 +356,7 @@ def page_preorder():
   <h1>獨家預訂！</h1>
   <p>您是否曾經想過，能否不用花時間去準備，便能享用我們的獨特香港奶茶呢？現在夢想成真了！我們很高興地告訴大家，我們計劃擴大我們香港奶茶體驗，希望很快便可以和大家分享我們的樽裝香港奶茶！</p>
   <p>請填寫一份簡單的表格來加入我們的預售清單。當樽裝奶茶上市時，您還可以享用我們的獨家優惠！</p>
-  <p><a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLScTNoTmYPSjW3Un0SRfl9dMmyL9ScK2uvTjb4YoSEoiJ7SgCA/viewform" target="_blank" rel="noopener">填寫表格</a></p>
+  <p><a href="https://docs.google.com/forms/d/e/1FAIpQLScTNoTmYPSjW3Un0SRfl9dMmyL9ScK2uvTjb4YoSEoiJ7SgCA/viewform" target="_blank" rel="noopener">填寫表格</a></p>
   <img class="feature" src="images/preorder-bottle.jpg" alt="樽裝奶茶預訂">
 </div>
 """
@@ -369,7 +377,7 @@ def page_mission():
 
 
 def faq_item(q, a):
-    return """<div class="faq-item"><button class="faq-q">{}<span class="icon">+</span></button><div class="faq-a">{}</div></div>""".format(q, a)
+    return """<div class="faq-static"><p class="faq-q-static">{}</p><div class="faq-a-static">{}</div></div>""".format(q, a)
 
 
 def page_faq_general():
@@ -401,11 +409,11 @@ def page_faq_product():
   <div class="eyebrow">常見問題</div>
   <h1>產品資訊</h1>
 
-  <div class="faq-item open">
-    <button class="faq-q">1) 如何沖製一杯美味的港式奶茶？<span class="icon">+</span></button>
-    <div class="faq-a">
+  <div class="faq-static">
+    <p class="faq-q-static">1) 如何沖製一杯美味的港式奶茶？</p>
+    <div class="faq-a-static">
       <p>來看<a href="https://www.instagram.com/reel/CvdBTytNmaa/" target="_blank" rel="noopener">影片</a>吧！如果你喜歡讀文字的，我們都為你準備了以下的說明！</p>
-      <p><strong>熱港式奶茶</strong></p>
+      <p><em class="faq-subhead">熱港式奶茶</em></p>
       <ul>
         <li>將1杯（240毫升）水煮沸。</li>
         <li>將3個茶包加入沸水中，轉至中火煮沸3分鐘（不要蓋上鍋蓋）。</li>
@@ -413,7 +421,7 @@ def page_faq_product():
         <li>重新加熱至沸騰，倒入裝有3湯匙（45毫升）淡奶和1湯匙（15毫升）煉奶（或適量砂糖）的杯子中。</li>
         <li>即可享用。<strong>注意：熱飲！</strong></li>
       </ul>
-      <p><strong>凍港式奶茶</strong></p>
+      <p><em class="faq-subhead">凍港式奶茶</em></p>
       <ul>
         <li>將1杯（240毫升）水煮沸。</li>
         <li>將3個茶包加入沸水中，轉至中火煮沸3分鐘（不要蓋上鍋蓋）。</li>

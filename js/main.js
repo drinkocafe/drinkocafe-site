@@ -29,17 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
     update();
   });
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(function (item) {
-    var q = item.querySelector('.faq-q');
-    if (!q) return;
-    q.addEventListener('click', function () {
-      var wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(function (o) { o.classList.remove('open'); });
-      if (!wasOpen) item.classList.add('open');
-    });
-  });
-
   // Forms have no backend on a static host. Rather than fail silently,
   // route submissions to a mailto link so a message is never lost.
   document.querySelectorAll('form[data-mailto]').forEach(function (form) {
