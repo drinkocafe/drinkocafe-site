@@ -97,10 +97,8 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
       <div class="eyebrow">DrinKo Cafe</div>
       <p style="max-width:280px">Home-made Hong Kong milk tea, made the way it's always been made — just easier.</p>
       <div class="social-row">
-        <a href="https://facebook.com/drinko" target="_blank" rel="noopener" aria-label="Facebook">{icon_facebook}</a>
-        <a href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="Instagram">{icon_instagram}</a>
-        <a href="https://youtube.com/drinko" target="_blank" rel="noopener" aria-label="YouTube">{icon_youtube}</a>
-        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener" aria-label="Pinterest">{icon_pinterest}</a>
+        <a href="https://facebook.com/drinkocafeus" target="_blank" rel="noopener" aria-label="Facebook">{icon_facebook}</a>
+        <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener" aria-label="Instagram">{icon_instagram}</a>
       </div>
     </div>
     <div class="newsletter">
@@ -120,8 +118,7 @@ def render(title, description, base, active, body, extra_head="", switch_href=No
         title=title, description=description, base=base,
         nav=nav_html(base, active), body=body, fonts=FONTS, extra_head=extra_head,
         switch_link=switch_link,
-        icon_facebook=ICON_FACEBOOK, icon_instagram=ICON_INSTAGRAM,
-        icon_youtube=ICON_YOUTUBE, icon_pinterest=ICON_PINTEREST
+        icon_facebook=ICON_FACEBOOK, icon_instagram=ICON_INSTAGRAM
     )
 
 
@@ -231,24 +228,24 @@ def page_home():
 </section>
 
 <section class="section">
-  <div class="section-head" style="text-align:left;margin-bottom:20px">
+  <div class="section-head section-head--left">
     <h2>Feature Collection</h2>
   </div>
   <div class="grid-products">{cards}</div>
 </section>
 
 <div class="feature-panel">
-  <h2>Enjoy easy Hong Kong Milk Tea making!</h2>
+  <h2 class="heading-lg">Enjoy easy Hong Kong Milk Tea making!</h2>
   <video class="video-embed" controls preload="none" poster="images/video-thumbnail.jpg" aria-label="How to make Hong Kong Milk Tea at home">
     <source src="images/how-to-make-tea.mp4" type="video/mp4">
   </video>
   <p style="max-width:480px;margin:12px auto 0">How to make Hong Kong Milk Tea at home &mdash;
-    or watch on <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a>.</p>
+    or watch on <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">Instagram</a>.</p>
 </div>
 
 <section class="section">
-  <div class="section-head" style="text-align:left;margin-bottom:20px">
-    <h2>Testimonials</h2>
+  <div class="section-head section-head--left">
+    <h2 class="heading-lg">Testimonials</h2>
   </div>
   <div class="testimonials">
     <div class="testimonial"><h3>Strong Tea flavor</h3><p>&ldquo;I really love how strong the tea aroma and flavor is. It smells and tastes great.&rdquo; &ndash; Jennifer</p></div>
@@ -286,7 +283,7 @@ def page_shop():
     cards = "".join(product_card(p, "") for p in PRODUCTS)
     body = """
 <div class="section">
-  <div class="section-head" style="text-align:left">
+  <div class="section-head section-head--left">
     <h1>All Products</h1>
     <p>4 products</p>
   </div>
@@ -340,7 +337,7 @@ def page_product(p):
     <div class="price-row">{was}<span class="price-now">${price} USD</span></div>
     <button class="btn disabled" disabled>Sold out</button>
     <div class="form-note">This product is currently sold out and the shop is on pause. Follow
-      <a href="https://instagram.com/drinko" target="_blank" rel="noopener">@drinko</a> on Instagram
+      <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">@drinko</a> on Instagram
       for restock updates, or reach out on the <a href="../contact.html">Contact</a> page.</div>
   </div>
 </div>
@@ -349,7 +346,7 @@ def page_product(p):
   {review_html}
 </div>
 <div class="section" style="padding-top:0">
-  <div class="section-head" style="text-align:left">
+  <div class="section-head section-head--left">
     <h2>You may also like</h2>
   </div>
   <div class="grid-products grid-products--4col">{related_cards}</div>

@@ -100,10 +100,8 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
       <div class="eyebrow">DrinKo Cafe</div>
       <p style="max-width:280px">自家製港式奶茶，一直以來的味道，現在更簡單。</p>
       <div class="social-row">
-        <a href="https://facebook.com/drinko" target="_blank" rel="noopener" aria-label="Facebook">{icon_facebook}</a>
-        <a href="https://instagram.com/drinko" target="_blank" rel="noopener" aria-label="Instagram">{icon_instagram}</a>
-        <a href="https://youtube.com/drinko" target="_blank" rel="noopener" aria-label="YouTube">{icon_youtube}</a>
-        <a href="https://pinterest.com/drinko" target="_blank" rel="noopener" aria-label="Pinterest">{icon_pinterest}</a>
+        <a href="https://facebook.com/drinkocafeus" target="_blank" rel="noopener" aria-label="Facebook">{icon_facebook}</a>
+        <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener" aria-label="Instagram">{icon_instagram}</a>
       </div>
     </div>
     <div class="newsletter">
@@ -123,8 +121,7 @@ def render(title, description, base, active, body, switch_href, extra_head=""):
         title=title, description=description, base=base, asset_base=asset_base,
         nav=nav_html(base, active), body=body, fonts=FONTS, extra_head=extra_head,
         switch_href=switch_href,
-        icon_facebook=ICON_FACEBOOK, icon_instagram=ICON_INSTAGRAM,
-        icon_youtube=ICON_YOUTUBE, icon_pinterest=ICON_PINTEREST
+        icon_facebook=ICON_FACEBOOK, icon_instagram=ICON_INSTAGRAM
     )
 
 
@@ -230,24 +227,24 @@ def page_home():
 </section>
 
 <section class="section">
-  <div class="section-head" style="text-align:left;margin-bottom:20px">
+  <div class="section-head section-head--left">
     <h2>推介</h2>
   </div>
   <div class="grid-products">{cards}</div>
 </section>
 
 <div class="feature-panel">
-  <h2>輕鬆製作香港奶茶！</h2>
+  <h2 class="heading-lg">輕鬆製作香港奶茶！</h2>
   <video class="video-embed" controls preload="none" poster="images/video-thumbnail.jpg" aria-label="在家製作香港奶茶">
     <source src="images/how-to-make-tea.mp4" type="video/mp4">
   </video>
   <p style="max-width:480px;margin:12px auto 0">在家製作香港奶茶 &mdash;
-    或於 <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram</a> 觀看。</p>
+    或於 <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">Instagram</a> 觀看。</p>
 </div>
 
 <section class="section">
-  <div class="section-head" style="text-align:left;margin-bottom:20px">
-    <h2>顧客意見</h2>
+  <div class="section-head section-head--left">
+    <h2 class="heading-lg">顧客意見</h2>
   </div>
   <div class="testimonials">
     <div class="testimonial"><h3>濃郁茶香</h3><p>&ldquo;我真的很喜歡這茶香氣和味道有多濃郁，聞起來和喝起來都很棒。&rdquo; &ndash; Jennifer</p></div>
@@ -280,7 +277,7 @@ def page_shop():
     cards = "".join(product_card(p, "") for p in PRODUCTS)
     body = """
 <div class="section">
-  <div class="section-head" style="text-align:left">
+  <div class="section-head section-head--left">
     <h1>我們的產品</h1>
     <p>共 4 件產品</p>
   </div>
@@ -327,7 +324,7 @@ def page_product(p):
     <div class="price-row">{was}<span class="price-now">${price} USD</span></div>
     <button class="btn disabled" disabled>售罄</button>
     <div class="form-note">此產品目前已售罄，商店暫停營業。請追蹤
-      <a href="https://instagram.com/drinko" target="_blank" rel="noopener">Instagram 上的 @drinko</a>
+      <a href="https://instagram.com/drinkocafe" target="_blank" rel="noopener">Instagram 上的 @drinko</a>
       以獲取補貨消息，或前往<a href="../contact.html">「聯絡」</a>頁面與我們聯繫。</div>
   </div>
 </div>
@@ -336,7 +333,7 @@ def page_product(p):
   {review_html}
 </div>
 <div class="section" style="padding-top:0">
-  <div class="section-head" style="text-align:left">
+  <div class="section-head section-head--left">
     <h2>您可能也會喜歡</h2>
   </div>
   <div class="grid-products grid-products--4col">{related_cards}</div>
